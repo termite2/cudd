@@ -1,0 +1,71 @@
+name:                cudd
+version:             0.1.0.0
+synopsis:            Bindings to the CUDD binary decision diagrams library
+-- description:         
+license:             BSD3
+license-file:        LICENSE
+author:              Adam Walker
+maintainer:          adam.walker@nicta.com.au
+copyright:           2014 Adam Walker
+category:            Data
+build-type:          Simple
+-- extra-source-files:  
+cabal-version:       >=1.10
+
+
+library
+  exposed-modules:     Cudd.File, Cudd.Convert, Cudd.Reorder, Cudd.MTR,
+                       Cudd.Hook, Cudd.Common, Cudd.C, Cudd.Cudd, Cudd.GC,
+                       Cudd.Internal, Cudd.Imperative
+  other-modules:       Cudd.ForeignHelpers
+  other-extensions:    ForeignFunctionInterface, CPP, FlexibleContexts,
+                       RankNTypes, EmptyDataDecls
+  build-depends:       base >=4.6 && <4.8, mtl >=2.1 && <2.3,
+                       array >=0.4 && <0.6, transformers >=0.3 && <0.5
+  -- hs-source-dirs:      
+  build-tools:         c2hs, hsc2hs
+  default-language:    Haskell2010
+  include-dirs:        . include
+  cc-options:          -g -O3 -fpic -mtune=native -DHAVE_IEEE_754 -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8
+  c-sources:           haskell_stubs/cuddwrap.c, haskell_stubs/stubs.c,
+                       cudd/cuddAPI.c, cudd/cuddAddAbs.c, cudd/cuddAddApply.c,
+                       cudd/cuddAddFind.c, cudd/cuddAddIte.c,
+                       cudd/cuddAddInv.c, cudd/cuddAddNeg.c,
+                       cudd/cuddAddWalsh.c, cudd/cuddAndAbs.c,
+                       cudd/cuddAnneal.c, cudd/cuddApa.c, cudd/cuddApprox.c,
+                       cudd/cuddBddAbs.c, cudd/cuddBddCorr.c,
+                       cudd/cuddBddIte.c, cudd/cuddBridge.c, cudd/cuddCache.c,
+                       cudd/cuddCheck.c, cudd/cuddClip.c, cudd/cuddCof.c,
+                       cudd/cuddCompose.c, cudd/cuddDecomp.c,
+                       cudd/cuddEssent.c, cudd/cuddExact.c, cudd/cuddExport.c,
+                       cudd/cuddGenCof.c, cudd/cuddGenetic.c,
+                       cudd/cuddGroup.c, cudd/cuddHarwell.c, cudd/cuddInit.c,
+                       cudd/cuddInteract.c, cudd/cuddLCache.c,
+                       cudd/cuddLevelQ.c, cudd/cuddLinear.c,
+                       cudd/cuddLiteral.c, cudd/cuddMatMult.c,
+                       cudd/cuddPriority.c, cudd/cuddRead.c, cudd/cuddRef.c,
+                       cudd/cuddReorder.c, cudd/cuddSat.c, cudd/cuddSign.c,
+                       cudd/cuddSolve.c, cudd/cuddSplit.c,
+                       cudd/cuddSubsetHB.c, cudd/cuddSubsetSP.c,
+                       cudd/cuddSymmetry.c, cudd/cuddTable.c, cudd/cuddUtil.c,
+                       cudd/cuddWindow.c, cudd/cuddZddCount.c,
+                       cudd/cuddZddFuncs.c, cudd/cuddZddGroup.c,
+                       cudd/cuddZddIsop.c, cudd/cuddZddLin.c,
+                       cudd/cuddZddMisc.c, cudd/cuddZddPort.c,
+                       cudd/cuddZddReord.c, cudd/cuddZddSetop.c,
+                       cudd/cuddZddSymm.c, cudd/cuddZddUtil.c,
+                       dddmp/dddmpStoreBdd.c, dddmp/dddmpStoreAdd.c,
+                       dddmp/dddmpStoreCnf.c, dddmp/dddmpLoad.c,
+                       dddmp/dddmpLoadCnf.c, dddmp/dddmpNodeBdd.c,
+                       dddmp/dddmpNodeAdd.c, dddmp/dddmpNodeCnf.c,
+                       dddmp/dddmpStoreMisc.c, dddmp/dddmpUtil.c,
+                       dddmp/dddmpBinary.c, dddmp/dddmpConvert.c,
+                       dddmp/dddmpDbg.c,
+                       epd/epd.c,
+                       mtr/mtrBasic.c, mtr/mtrGroup.c,
+                       st/st.c
+                       util/cpu_time.c, util/cpu_stats.c, util/safe_mem.c,
+                       util/strsav.c, util/texpand.c, util/ptime.c,
+                       util/prtime.c, util/pipefork.c, util/pathsearch.c,
+                       util/stub.c, util/datalimit.c
+  extra-libraries:     m
